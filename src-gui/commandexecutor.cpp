@@ -34,7 +34,7 @@ void commandExecutor::parseAndExecMsg( const std::string &msg ) {
     if( inputOrder.get_cmd() == "ping" ) {				//factory method- creating objects of concrete commands...
         ord = std::make_unique <pingOrder>( msg );
     } else if( inputOrder.get_cmd() == "peer_list" ) {
-        ord = std::make_unique <peerListOrder>( msg );
+        ord = std::make_unique <peerListOrder>( msg,this );
     } else if( inputOrder.get_cmd() == "add_peer" ) {
         ord = std::make_unique <addPeerOrder>( msg,this );
     } else if( inputOrder.get_cmd() == "delete_peer" ) {
@@ -150,7 +150,7 @@ void commandExecutor::timer_slot() {
 
     if(m_net_client->is_connected()){
         try{
-        m_sender->sendCommand(CommandSender::orderType::GET_STATUS);
+        m_sender->sendCommand(CommandSender::orderType::PEERLIST);
         }catch(std::exception &e){
             qDebug()<<e.what();
         }

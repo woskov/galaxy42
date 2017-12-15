@@ -32,7 +32,8 @@ public:
         GET_STATUS,
         PAY,
         SET_ACCOUNT,
-        BITCOINACCOUNT
+        BITCOINACCOUNT,
+        PEERLIST
     };
 
     explicit CommandSender(commandExecutor* comm_exec,QObject *parent = nullptr);

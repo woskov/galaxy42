@@ -117,8 +117,9 @@ class peerListOrder final: public order
 public:
 
     peerListOrder(const RpcId& Id);
-    peerListOrder(const std::string &json_str);
+    peerListOrder(const std::string &json_str, commandExecutor *executor);
     void execute(MainWindow &main_window);
+    std::string get_str() const;
 
 protected:
 

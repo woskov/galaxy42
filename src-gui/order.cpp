@@ -93,19 +93,22 @@ void pingOrder::execute( MainWindow &mw )
     return;
 }
 
-//peerListOrder::peerListOrder()
-//{
-//    m_cmd = "peer_list";
-//    m_state = "ok";
-//}
-
-peerListOrder::peerListOrder( const std::string &json_str ): order( json_str )
+peerListOrder::peerListOrder(const RpcId &id)
 {
+    m_cmd = "peer_list";
+    m_state = "ok";
+    m_id= id.m_id;
+}
+
+peerListOrder::peerListOrder( const std::string &json_str ,commandExecutor *executor): order( json_str )
+{
+    m_executor = executor;
+
     using nlohmann::json;
     try {
         json j = json::parse( json_str );
         m_cmd = j["cmd"];
-        std::vector<std::string> tmp = j["msg"];
+        std::vector<std::string> tmp = j["peers"];
         m_state = j["state"];
         m_id = j["id"];
         m_msg_array = std::move( tmp );
@@ -117,13 +120,20 @@ peerListOrder::peerListOrder( const std::string &json_str ): order( json_str )
 void peerListOrder::execute( MainWindow &main_window )
 {
     if( m_state == "ok" ) {
-        main_window.show_peers( m_msg_array );
+//        main_window.show_peers( m_msg_array );
     } else {
-        main_window.errorNotification( QString::fromStdString( m_msg ) );
+//        main_window.errorNotification( QString::fromStdString( m_msg ) );
     }
 
     return;
 }
+
+std::string peerListOrder::get_str() const
+{
+    nlohmann::json j{{"cmd", m_cmd}, {"state",m_state},{"id",m_id}};
+    return j.dump();
+}
+
 
 getGalaxyOrder::getGalaxyOrder( const RpcId &id, const std::vector<std::string> &ipv4_list )
 {
@@ -659,4 +669,7 @@ std:: string bitcoinAccountOrder::get_str() const
     nlohmann::json j{{"cmd",m_cmd}, {"state",m_state}, {"id",m_id}};
     return j.dump();
 }
+
+
+
 
