@@ -8,6 +8,7 @@ QrDialog::QrDialog( QPixmap &qr_code,QWidget *parent ) :
 
     m_scene.addPixmap( m_code );
     ui->QrView->setScene( &m_scene );
+    m_scene.addPixmap(QPixmap(":/qrcode"));
 }
 
 QrDialog::~QrDialog()

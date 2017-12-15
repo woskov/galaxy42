@@ -299,8 +299,6 @@ class statusOrder final:public order
 public:
 
     statusOrder(const RpcId& Id);
-
-
     statusOrder(const std::string &json_str,commandExecutor *executor);
     void execute(MainWindow &main_window);
 
@@ -310,5 +308,17 @@ private:
 
     int32_t m_satoshi;
 };
+
+class bitcoinAccountOrder final : public order
+{
+public:
+    bitcoinAccountOrder(const std::string &json_str,commandExecutor *executor);
+    bitcoinAccountOrder(const RpcId& Id);
+    void execute(MainWindow &main_window);
+    std::string get_str() const;
+private :
+    std::string m_btc_address;
+};
+
 
 #endif // ORDER_HPP

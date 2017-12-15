@@ -311,12 +311,10 @@ std::string banAllOrder::get_str() const
 
 deletePeerOrder::deletePeerOrder( const RpcId& id,const MeshPeer &peer )
 {
-
     m_cmd = "delete_peer";
     m_state = "ok";
     m_peer = peer.getVip().toStdString();
     m_id = id.m_id;
-
 }
 
 deletePeerOrder::deletePeerOrder( const std::string &json_str,commandExecutor *exec ):order()
@@ -382,7 +380,6 @@ std::string deleteAllPeersOrder::get_str() const
     nlohmann::json j{{"cmd", m_cmd}, {"state",m_state},{"id",m_id}};
     return j.dump();
 }
-
 
 order::order( const std::string &json_str )
 {
@@ -450,14 +447,12 @@ std::string order::getPeerName()
 
 getClientName::getClientName( const std::string &json_str,commandExecutor *executor )
 {
+
+    m_executor = executor;
     try {
         nlohmann::json j = nlohmann::json::parse( json_str );
         m_state = j["state"];
         m_id = j["id"];
-        if(m_state == "ok") {
-            m_account = j["account_address"];
-        }
-        m_executor = executor;
     } catch( std::exception &e ) {
         qDebug()<<e.what();
     }
@@ -575,7 +570,6 @@ std::string statusOrder::get_str() const
     return j.dump();
 }
 
-
 setAccountOrder::setAccountOrder(const RpcId& id,const MeshPeer &peer )
 {
     m_cmd = "set_account";
@@ -621,4 +615,48 @@ statusOrder::statusOrder(const RpcId& Id)
     }
 }
 
+
+bitcoinAccountOrder::bitcoinAccountOrder(const std::string &json_str,commandExecutor *executor)
+{
+    if(!executor) {
+        throw std::runtime_error("can't create order without executor");
+    }
+
+    m_executor = executor;
+    try{
+        nlohmann::json j = nlohmann::json::parse( json_str );
+        m_state = j["state"];
+        m_id = j["id"];
+        if(m_state == "ok"){
+            m_btc_address= j["address"];
+        }
+    }catch(std::exception &e){
+        qDebug()<<e.what();
+    }
+}
+
+bitcoinAccountOrder::bitcoinAccountOrder(const RpcId& Id)
+{
+    try{
+        m_cmd ="get_btc_address";
+        m_state = "ok";
+        m_id = Id.m_id;
+    }catch(std::exception &e){
+        qDebug()<<e.what();
+    }
+
+}
+
+void bitcoinAccountOrder::execute(MainWindow &main_window)
+{
+    if(!m_executor) {
+        throw std::runtime_error("can't execute order without executor");
+    }
+}
+
+std:: string bitcoinAccountOrder::get_str() const
+{
+    nlohmann::json j{{"cmd",m_cmd}, {"state",m_state}, {"id",m_id}};
+    return j.dump();
+}
 

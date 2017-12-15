@@ -31,7 +31,8 @@ public:
         GETNAME,
         GET_STATUS,
         PAY,
-        SET_ACCOUNT
+        SET_ACCOUNT,
+        BITCOINACCOUNT
     };
 
     explicit CommandSender(commandExecutor* comm_exec,QObject *parent = nullptr);

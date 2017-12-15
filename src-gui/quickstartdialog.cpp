@@ -13,6 +13,7 @@ quickStartDialog::quickStartDialog( QWidget *parent ) :
 {
     ui->setupUi( this );
     ui->InviteEdit->setText("fd42:6e4d:ce1e:c54a:ed78:0a4e:bbed:126e@176.31.171.15");
+    ui->QrZoomButton->setIcon(QIcon(":/qrcode"));
 }
 
 void quickStartDialog::setIps( const QString &ip,const QString &invitation )
