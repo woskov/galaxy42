@@ -33,7 +33,8 @@ public:
         PAY,
         SET_ACCOUNT,
         BITCOINACCOUNT,
-        PEERLIST
+        PEERLIST,
+        GET_ACCOUNT
     };
 
     explicit CommandSender(commandExecutor* comm_exec,QObject *parent = nullptr);

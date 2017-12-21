@@ -560,6 +560,10 @@ void MainWindow::runTunTap()
     m_tuntap_runner = new TunTapRunner(this,program_pth,script_path);
 }
 
+void MainWindow::onGetBtcAddress(const QString address)
+{
+    m_status_form->setStatus("Bitcoin address:"+ address);
+}
 
 void MainWindow::setBtc(uint64_t btc)
 {

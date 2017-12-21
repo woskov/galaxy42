@@ -94,6 +94,9 @@ std::shared_ptr<order> CommandSender::prepareCommand( CommandSender::orderType t
     case orderType::PEERLIST:
         ord = std::make_shared<peerListOrder>(m_counter.getRpcId());
         break;
+    case orderType::GET_ACCOUNT:
+        ord = std::make_shared<getAccount>(m_counter.getRpcId());
+        break;
     default:
         throw std::runtime_error ( tr( "improper number of parameters for this function" ).toStdString() );
         break;

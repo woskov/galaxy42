@@ -79,6 +79,7 @@ public slots:
 
     void setDebugInfo(const QString &str);
 
+    void onGetBtcAddress(const QString address);
 private slots:
 
     void onAddPerrToList(const QString &peer);

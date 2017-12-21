@@ -460,6 +460,7 @@ getClientName::getClientName( const std::string &json_str,commandExecutor *execu
 
     m_executor = executor;
     try {
+
         nlohmann::json j = nlohmann::json::parse( json_str );
         m_state = j["state"];
         m_id = j["id"];
@@ -625,7 +626,6 @@ statusOrder::statusOrder(const RpcId& Id)
     }
 }
 
-
 bitcoinAccountOrder::bitcoinAccountOrder(const std::string &json_str,commandExecutor *executor)
 {
     if(!executor) {
@@ -641,6 +641,16 @@ bitcoinAccountOrder::bitcoinAccountOrder(const std::string &json_str,commandExec
             m_btc_address= j["address"];
         }
     }catch(std::exception &e){
+    }
+}
+
+getAccount::getAccount(const RpcId& id)
+{
+    try{
+        m_cmd = "get_btc_address";
+        m_state = "ok";
+        m_id = id.m_id;
+    } catch(std::exception &e) {
         qDebug()<<e.what();
     }
 }
@@ -654,7 +664,6 @@ bitcoinAccountOrder::bitcoinAccountOrder(const RpcId& Id)
     }catch(std::exception &e){
         qDebug()<<e.what();
     }
-
 }
 
 void bitcoinAccountOrder::execute(MainWindow &main_window)
@@ -670,6 +679,26 @@ std:: string bitcoinAccountOrder::get_str() const
     return j.dump();
 }
 
+getAccount::getAccount(const std::string &json_str,commandExecutor *executor)
+{
+    m_executor = executor;
+    try{
+        nlohmann::json j = nlohmann::json::parse( json_str );
+        m_state = j["state"];
+        m_account_address = j["address"];
 
+    } catch(std::exception &e) {
+        qDebug()<<e.what();
+    }
+}
 
+void getAccount::execute(MainWindow &main_window)
+{
+    main_window.onGetBtcAddress(QString::fromStdString(m_account_address));
+}
 
+std::string getAccount::get_str() const
+{
+    nlohmann::json j{{"cmd",m_cmd}, {"state",m_state}, {"id",m_id},{"peer",m_peer}};
+    return j.dump();
+}

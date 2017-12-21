@@ -48,7 +48,9 @@ SOURCES += \
     processrunner.cpp \
     addressmodel.cpp \
     addressbookform.cpp \
-    tuntaprunner.cpp
+    tuntaprunner.cpp \
+    financeform.cpp \
+    paymentdialog.cpp
 
 
 HEADERS += \
@@ -79,7 +81,9 @@ HEADERS += \
     processrunner.h \
     addressmodel.h \
     addressbookform.h \
-    tuntaprunner.h
+    tuntaprunner.h \
+    financeform.h \
+    paymentdialog.h
 
 FORMS += \
     mainwindow.ui \
@@ -96,7 +100,10 @@ FORMS += \
     nodecontrolerdialog.ui \
     statusform.ui \
     addressbookform.ui \
-    addressbookform.ui
+    addressbookform.ui \
+    financeform.ui \
+    financeform.ui \
+    paymentdialog.ui
 
 
 debug {

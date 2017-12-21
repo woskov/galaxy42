@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>634</width>
-    <height>392</height>
+    <width>669</width>
+    <height>599</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>634</width>
+     <width>669</width>
      <height>21</height>
     </rect>
    </property>
@@ -163,6 +163,18 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QDockWidget" name="financeDock">
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="financeForm" name="financeWidget" native="true"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <action name="actionDebug">
    <property name="icon">
     <iconset resource="icons.qrc">
@@ -182,6 +194,7 @@
    </property>
   </action>
   <zorder>peerListDock</zorder>
+  <zorder>financeDock</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -195,6 +208,12 @@
    <class>quickStartDialog</class>
    <extends>QWidget</extends>
    <header location="global">quickstartdialog.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>financeForm</class>
+   <extends>QWidget</extends>
+   <header location="global">financeform.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

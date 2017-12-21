@@ -59,8 +59,8 @@ void commandExecutor::parseAndExecMsg( const std::string &msg ) {
         ord = std::make_unique<payOrder>(msg,this);
     }else if(inputOrder.get_cmd()=="set_account"){
         ord = std::make_unique<setAccountOrder>(msg,this);
-    } else if(inputOrder.get_cmd() == "get_btc_address"){
-        ord = std::make_unique<bitcoinAccountOrder>(msg,this);
+    }else if(inputOrder.get_cmd()=="get_btc_address"){
+        ord = std::make_unique<getAccount>(msg,this);
     } else {
         qDebug()<<"unknown command";
         return;
@@ -180,8 +180,9 @@ void commandExecutor::setSenderRpcName( const QString& name )
     emit GetSesionId();
 
     m_sender->onGetName( name );
-    m_sender->sendCommand(CommandSender::orderType::BITCOINACCOUNT);
-//    m_sender->sendCommand(CommandSender::orderType::GET_STATUS);
+//    m_sender->sendCommand(CommandSender::orderType::BITCOINACCOUNT);
+    m_sender->sendCommand(CommandSender::orderType::GET_STATUS);
+    m_sender->sendCommand(CommandSender::orderType::GET_ACCOUNT);
     m_timer->start(60000);
 }
 
@@ -198,5 +199,4 @@ void commandExecutor::onStatusTick()
 {
 
 }
-
 

@@ -40,9 +40,7 @@ public:
     }
 
     order(const std::string &json_str);
-
     order(e_type cmd);
-
     inline std::string getId()const{return m_id;}
 
     order(order* ord)
@@ -321,5 +319,17 @@ private :
     std::string m_btc_address;
 };
 
+class getAccount final:public order
+{
+public:
+    getAccount(const std::string &json_str,commandExecutor *executor);
+    getAccount(const RpcId& id);
+
+    void execute(MainWindow &main_window);
+    std::string get_str() const;
+private:
+    std::string m_account_address;
+
+};
 
 #endif // ORDER_HPP
