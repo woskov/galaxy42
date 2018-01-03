@@ -22,5 +22,6 @@
         <file alias="letter">../recources/gui/icons/Script-Edit.png</file>
         <file alias="group-delete">../recources/gui/icons/Group-Delete.png</file>
         <file alias="qrcode">../recources/gui/icons/qrcode.png</file>
+        <file alias="dollar">../recources/gui/icons/Money-Dollar.png</file>
     </qresource>
 </RCC>

@@ -164,6 +164,9 @@
    </widget>
   </widget>
   <widget class="QDockWidget" name="financeDock">
+   <property name="windowTitle">
+    <string>Your finance</string>
+   </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
    </attribute>

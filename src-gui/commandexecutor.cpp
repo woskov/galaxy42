@@ -150,7 +150,7 @@ void commandExecutor::timer_slot() {
 
     if(m_net_client->is_connected()){
         try{
-        m_sender->sendCommand(CommandSender::orderType::PEERLIST);
+        m_sender->sendCommand(CommandSender::orderType::GET_STATUS);
         }catch(std::exception &e){
             qDebug()<<e.what();
         }

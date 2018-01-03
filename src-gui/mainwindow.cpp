@@ -62,11 +62,6 @@ MainWindow::MainWindow( QWidget *parent ) :
 
 
     m_tun_process = std::make_unique<tunserverProcess>();
-
-    QSound sound(":/sound");
-    sound.play();
-
-
 }
 
 void MainWindow::setDebugInfo(const QString &str)
@@ -249,7 +244,6 @@ void MainWindow::onCreateGalaxyConnection()
 {
 
     QStringList list_ips = getLocalIps();
-
     std::vector <std::string> ips;
 
     for ( auto &it:list_ips ) {
@@ -301,9 +295,7 @@ void MainWindow::errorNotification( QString err )
     }
 
     error_flag = true;
-
     QMessageBox::warning( this,tr( "Error" ),err );
-
     error_flag = false;
 }
 
@@ -354,7 +346,6 @@ void MainWindow::onAllowFriend( bool val )
         message.exec();
         return;
     }
-
 }
 
 void MainWindow::onAllowPeer( bool val )
@@ -509,7 +500,6 @@ void MainWindow::onDeleteAll()
 StatusForm* MainWindow::GetStatusObject()
 {
     return m_status_form;
-    ;
 }
 
 void MainWindow::onNetConnected( bool val )
@@ -562,18 +552,22 @@ void MainWindow::runTunTap()
 
 void MainWindow::onGetBtcAddress(const QString address)
 {
-    m_status_form->setStatus("Bitcoin address:"+ address);
+//    m_status_form->setStatus("Bitcoin address:"+ address);
+    ui->financeWidget->setBtcAddress(address);
 }
 
 void MainWindow::setBtc(uint64_t btc)
 {
-    if(btc != m_last_btc_value){
-        QSound sound(":/sound");
-        sound.play();
-        m_status_form->setStatus(QString (tr("avaible founds:") +
-                                          QString::number(int(btc/1e8))+"."
-                                          +QString::number(int(btc)%int(1e8))
-                                          +" BTC"));
-    }
+    ui->financeWidget->setBtcBalance(QString::number(int(btc/1e8)) + "."
+                                          + QString::number(int(btc)%int(1e8))
+                                    );
+//    if(btc != m_last_btc_value){
+//        QSound sound(":/sound");
+//        sound.play();
+//        m_status_form->setStatus(QString (tr("avaible founds:") +
+//                                          QString::number(int(btc/1e8))+"."
+//                                          +QString::number(int(btc)%int(1e8))
+//                                          +" BTC"));
+//    }
 }
 

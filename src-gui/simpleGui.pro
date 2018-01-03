@@ -50,7 +50,8 @@ SOURCES += \
     addressbookform.cpp \
     tuntaprunner.cpp \
     financeform.cpp \
-    paymentdialog.cpp
+    paymentdialog.cpp \
+    debugform.cpp
 
 
 HEADERS += \
@@ -83,7 +84,8 @@ HEADERS += \
     addressbookform.h \
     tuntaprunner.h \
     financeform.h \
-    paymentdialog.h
+    paymentdialog.h \
+    debugform.h
 
 FORMS += \
     mainwindow.ui \
@@ -103,7 +105,8 @@ FORMS += \
     addressbookform.ui \
     financeform.ui \
     financeform.ui \
-    paymentdialog.ui
+    paymentdialog.ui \
+    debugform.ui
 
 
 debug {
