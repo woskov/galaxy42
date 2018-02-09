@@ -455,7 +455,9 @@ getClientName::getClientName( const std::string &json_str,commandExecutor *execu
         m_state = j["state"];
         m_id = j["id"];
         if(m_state == "ok") {
-            m_account = j["account_address"];
+            if(j.find("account_address") != j.end()){
+                m_account = j["account_address"];
+            }
         }
         m_executor = executor;
     } catch( std::exception &e ) {
@@ -621,4 +623,43 @@ statusOrder::statusOrder(const RpcId& Id)
     }
 }
 
+getBtcAddressOrder::getBtcAddressOrder(const RpcId& Id)
+{
+    try{
+        m_cmd = "get_btc_address";
+        m_state = "ok";
+        m_id = Id.m_id;
+    }catch(std::exception &e){
+        qDebug()<<e.what();
+    }
+
+}
+
+getBtcAddressOrder::getBtcAddressOrder(const std::string &json_str,commandExecutor *executor)
+{
+
+    m_executor = executor;
+    try{
+        nlohmann::json j = nlohmann::json::parse( json_str );
+        m_cmd = j["cmd"];
+        m_state = j["state"];
+        if(m_state=="ok") {
+            m_btc_address = j["address"];
+        }
+    }catch(std::exception &e){
+        qDebug()<<"can't parse getBtcAddressOrder";
+    }
+}
+
+void getBtcAddressOrder::execute(MainWindow &main_window)
+{
+    main_window.showBtcAddress(QString::fromStdString(m_btc_address) );
+//	main_window.setStatusBar();
+}
+
+std::string getBtcAddressOrder::get_str() const
+{
+    nlohmann::json j{{"cmd",m_cmd}, {"state",m_state}, {"id",m_id} };
+    return j.dump();
+}
 

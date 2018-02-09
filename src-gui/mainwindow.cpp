@@ -573,3 +573,9 @@ void MainWindow::setBtc(uint64_t btc)
     }
 }
 
+void MainWindow::showBtcAddress(QString btc_address)
+{
+    m_status_form->setStatus("Btc address:"+btc_address);
+}
+
+

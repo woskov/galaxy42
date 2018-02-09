@@ -78,6 +78,7 @@ public slots:
     void setBtc(uint64_t btc);
 
     void setDebugInfo(const QString &str);
+    void showBtcAddress(QString);
 
 private slots:
 
@@ -101,7 +102,6 @@ private slots:
     void onAllowPeer(bool);
     void on_actionsettings_triggered();
     void onNetConnected(bool);
-
 private:
     commandExecutor *m_cmd_exec;
 

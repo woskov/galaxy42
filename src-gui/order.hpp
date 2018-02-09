@@ -311,4 +311,20 @@ private:
     int32_t m_satoshi;
 };
 
+
+class getBtcAddressOrder final:public order
+{
+public:
+    getBtcAddressOrder(const RpcId& Id);
+    getBtcAddressOrder(const std::string &json_str,commandExecutor *executor);
+
+    void execute(MainWindow &main_window) override;
+    std::string get_str() const override;
+
+private:
+std::string m_btc_address;
+
+
+};
+
 #endif // ORDER_HPP
